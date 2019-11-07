@@ -8,154 +8,29 @@
     <link rel="stylesheet" href="./node_modules/quill/dist/quill.snow.css">
     <script src="./node_modules/quill/dist/quill.js"></script>
     <script src="./bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./bower_components/ali-oss/dist/aliyun-oss-sdk.min.js"></script>
-    <script src="./bower_components/axios/dist/axios.min.js"></script>
     <style>
-        #app{
-            position: absolute;
-            top:0;
-            bottom: 0;
-            left: 0;
-            right:0;
-            margin: auto;
-            width: 80vw;
+        .app{
+            float:left;
+            width: 45vw;
             height: 80vh
-        }
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="12px"]::before { 
-            content: '12px'; 
-            font-size: 12px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="13px"]::before { 
-            content: '13px'; 
-            font-size: 13px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="14px"]::before { 
-            content: '14px'; 
-            font-size: 14px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="15px"]::before { 
-            content: '15px'; 
-            font-size: 15px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="16px"]::before { 
-            content: '16px'; 
-            font-size: 16px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="18px"]::before { 
-            content: '18px'; 
-            font-size: 18px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="20px"]::before { 
-            content: '20px'; 
-            font-size: 20px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="22px"]::before { 
-            content: '22px'; 
-            font-size: 22px !important; 
-        } 
-        .ql-snow .ql-picker.ql-size .ql-picker-item[data-value="24px"]::before { 
-            content: '24px'; 
-            font-size: 24px !important; 
-        } 
-        #counter {
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            position:relative;
-            padding: 0px 20px;
-            height: 30px;
-            line-height: 30px;
-            margin-top: -30px;
-            background:#fff;
-        }
-        .ql-toolbar button {
-            position:relative
-        }
-        .ql-image{
-            position:absolute;
-            left:0;
-            top:0;
-            right:0;
-            bottom:0;
         }
     </style>
 </head>
 <body>
-    <div id="app">
+    <div class="app">
         <!-- 内容区 -->
         <div id="editor"></div>
         <!-- 字数 -->
         <div id="counter"></div>
     </div>
-    <script>
-
-        // 工具栏选项
-        var toolbarOptions = [
-            {'header': [1, 2, 3, 4, 5, 6, false]},
-            {size: ['12px','13px','14px','15px', '16px', '18px','20px','22px', '24px']},
-            'clean', // 清除格式
-            'bold',
-            'italic',
-            'underline',
-            'strike',
-            'blockquote',
-            // 'code-block',
-            // {'direction': 'rtl'}, // 没求用
-            {'font': []},
-            {'align': []},
-            {'color': []}, 
-            {'background': []},
-            {'indent': '-1'},
-            {'indent': '+1'},
-            {'list': 'ordered'},
-            {'list': 'bullet'},
-            // {'script': 'sub'},
-            // {'script': 'super'},
-            'link',
-            // 'video',
-            'image',
-            // 'formula'
-        ]
-
-        // 字数统计
-        Quill.register('modules/counter', function(quill, options) {
-        var container = document.querySelector('#counter');
-        quill.on('text-change', function() {
-            var text = quill.getText();
-            container.innerText = text.length;
-            });
-        });
-
-        // 字体自定义
-        var Size = Quill.import('attributors/style/size'); 
-        Size.whitelist = ['12px', '13px', '14px', '15px', '16px', '18px', '20px', '22px', '24px']; 
-        Quill.register(Size, true); 
-        var editor = new Quill('#editor', {
-            // modules: {toolbar: '#toolbar'},
-            modules: {
-                toolbar: toolbarOptions,
-                counter: true, //计数
-            },
-            theme: 'snow',
-            placeholder: '请输入一些内容',
-            readOnly: false,
-            scrollingContainer: null // 指定该容器具有滚动条。
-        })
-
-        // 给image按钮加一个id, 供upload.js使用
-        document.getElementsByClassName('ql-image')[0].setAttribute('id', 'ql-image')
-
-        // 事件处理程序 处理图片上传
-        var toolbar = editor.getModule('toolbar')
-        toolbar.addHandler('image', function () {
-            set_upload_param(uploader, '', false)
-        })
-        // 插入回显图片, 在upload.js里面调用了
-        function showImage(imageUrl) {
-            editor.insertEmbed(10, 'image', imageUrl)
-        }
-
-    </script>
-    <script src="./plupload.full.min.js"></script>
-    <script src="./upload.js"></script>
+    <div class="app">
+        <!-- 内容区 -->
+        <div id="editor1"></div>
+        <!-- 字数 -->
+        <div id="counter1"></div>
+    </div>
+    <script src="plupload.full.min.js"></script>
+    <script src="caika-upload.js"></script>
+    <script src="./caika-quill.js"></script>
 </body>
 </html>

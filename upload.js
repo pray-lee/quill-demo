@@ -173,7 +173,7 @@ var uploader = new plupload.Uploader({
         },
 
         FilesAdded: function (up, files) {
-            filesAdded(up, files);
+            filesAdded(up, files, uploader);
         },
 
         // FilesRemoved: function(up, files) {
@@ -189,20 +189,21 @@ var uploader = new plupload.Uploader({
             set_upload_param(up, file.name, true);
         },
 
-        UploadProgress: function (up, file) {
-            // var d = document.getElementById(file.id);
-            // d.getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
-            // var prog = d.getElementsByTagName('div')[0];
-            // var progBar = prog.getElementsByTagName('div')[0];
-            // progBar.style.width= 2*file.percent+'px';
-            // progBar.setAttribute('aria-valuenow', file.percent);
-        },
+        // UploadProgress: function (up, file) {
+        //     // var d = document.getElementById(file.id);
+        //     // d.getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
+        //     // var prog = d.getElementsByTagName('div')[0];
+        //     // var progBar = prog.getElementsByTagName('div')[0];
+        //     // progBar.style.width= 2*file.percent+'px';
+        //     // progBar.setAttribute('aria-valuenow', file.percent);
+        // },
 
         FileUploaded: function (up, file, info) {
-            console.log(file, info)
+            // console.log(file, info)
             if (info.status == 200) {
                 // document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = 'upload to oss success, object name:' + file.name + ' 回调服务器返回的内容是:' + info.response;
-                setUri(file);
+                console.log(editor)
+                setUri(editor, file);
             } else if (info.status == 203) {
                 document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '上传到OSS成功，但是oss访问用户设置的上传回调服务器失败，失败原因是:' + info.response;
             } else {
@@ -226,35 +227,17 @@ var uploader = new plupload.Uploader({
 
 uploader.init();
 
-function removeFile(tableId) {
-    $("#" + tableId).find("input[name$='ck']:checked").each(function () {
-        var filenameremove = $(this).parent().next().find('div').eq(0);
-        if (filenameremove.attr("id")) {
-            var splitElement = filenameremove.html().split(' (')[0];
-            uploader.removeFile(splitElement);
-        }
-    });
-    $("#" + tableId).find("input[name$='ck']:checked").parent().parent().remove();
-    resetTrNum(tableId);
-}
-
-function setUri(file) {
+function setUri(editor, file) {
     // 插入图片回显
-    showImage(host + "/" + g_object_name)
+    showImage(editor, host + "/" + g_object_name)
 }
 
-$(".CheckAll").bind("click", function () {
-    var flag = $(this).prop("checked");
-    $("input[code='ck']:checkbox").each(function () {
-        $(this).prop("checked", flag);
-    });
-});
 
-function filesAdded(up, files) {
+function filesAdded(up, files, uploader) {
     var divhtml = "";
     plupload.each(files, function (file) {
         console.log(file)
-        var tmp = document.createElement('tr');
+        // var tmp = document.createElement('tr');
         // tmp.innerHTML =
         //     '<td class="form-ck" style="padding: 8px;"><input type="checkbox" code="ck" name="ck"/></td>' +
         //     '<td style="width: 55%;"> <div id="' + file.id + '"><a href="" target="_blank">' + file.name + ' (' + plupload.formatSize(file.size) + ')</a><b></b>' +
