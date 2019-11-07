@@ -141,10 +141,10 @@
             scrollingContainer: null // 指定该容器具有滚动条。
         })
 
-        // 给image按钮加一个id
+        // 给image按钮加一个id, 供upload.js使用
         document.getElementsByClassName('ql-image')[0].setAttribute('id', 'ql-image')
 
-        // 事件处理程序 处理link超链接
+        // 事件处理程序 处理图片上传
         var toolbar = editor.getModule('toolbar')
         toolbar.addHandler('image', function () {
             set_upload_param(uploader, '', false)
