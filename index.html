@@ -17,13 +17,13 @@
     </style>
 </head>
 <body>
-    <div class="app">
+    <div class="app" id="app">
         <!-- 内容区 -->
         <div id="editor"></div>
         <!-- 字数 -->
         <div id="counter"></div>
     </div>
-    <div class="app">
+    <div class="app" id="app1">
         <!-- 内容区 -->
         <div id="editor1"></div>
         <!-- 字数 -->
@@ -32,5 +32,30 @@
     <script src="plupload.full.min.js"></script>
     <script src="caika-upload.js"></script>
     <script src="./caika-quill.js"></script>
+    <script>
+        
+        var editor = new Quill('#editor', {
+            modules: {
+                toolbar: toolbarOptions,
+                counter: true, //计数
+            },
+            theme: 'snow',
+            placeholder: '请输入一些内容',
+            readOnly: false,
+            scrollingContainer: null // 指定该容器具有滚动条。
+        })
+        var editor1 = new Quill('#editor1', {
+            modules: {
+                toolbar: toolbarOptions,
+                counter: true, //计数
+            },
+            theme: 'snow',
+            placeholder: '请输入一些内容',
+            readOnly: false,
+            scrollingContainer: null // 指定该容器具有滚动条。
+        })
+        bundleImageClick('app',editor)
+        bundleImageClick('app1',editor1)
+    </script>
 </body>
 </html>
