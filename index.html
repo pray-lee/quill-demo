@@ -29,6 +29,8 @@
         <!-- 字数 -->
         <div id="counter1"></div>
     </div>
+    <button class="getContent">获取内容</button>
+    <button class="setContent">设置内容</button>
     <script src="plupload.full.min.js"></script>
     <script src="caika-upload.js"></script>
     <script src="./caika-quill.js"></script>
@@ -56,6 +58,13 @@
         })
         bundleImageClick('app',editor)
         bundleImageClick('app1',editor1)
+        $('.getContent').on('click', function () {
+            console.log($('#editor .ql-editor').html())
+            console.log($('#editor1 .ql-editor').html())
+        })
+        $('.setContent').on('click', function () {
+            $('#editor .ql-editor').html($('#editor .ql-editor').html() + '<p>hhhhhhhhhhhhh</p>')
+        })
     </script>
 </body>
 </html>
