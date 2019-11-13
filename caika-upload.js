@@ -198,7 +198,8 @@ CKEditor.prototype.createUploader = function (editor) {
 // 回显回调
 CKEditor.setUri = function (editor, file) {
     // 插入图片回显
-    editor.insertEmbed(10, 'image', CKOptions.host + '/' + CKOptions.g_object_name)
+    var range = editor.getSelection().index 
+    editor.insertEmbed(range, 'image', CKOptions.host + '/' + CKOptions.g_object_name)
 }
 
 // 上传

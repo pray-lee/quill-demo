@@ -46,13 +46,13 @@ var toolbarOptions = [{
 ]
 
 // 字数统计
-Quill.register('modules/counter', function (quill, options) {
-    var container = document.querySelector('#counter');
-    quill.on('text-change', function () {
-        var text = quill.getText();
-        container.innerText = text.length;
-    });
-});
+// Quill.register('modules/counter', function (quill, options) {
+//     var container = document.querySelector('#counter');
+//     quill.on('text-change', function () {
+//         var text = quill.getText();
+//         container.innerText = text.length;
+//     });
+// });
 
 // 字体自定义
 var Size = Quill.import('attributors/style/size');
