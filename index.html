@@ -64,6 +64,8 @@
         })
         $('.setContent').on('click', function () {
             $('#editor .ql-editor').html($('#editor .ql-editor').html() + '<p>hhhhhhhhhhhhh</p>')
+            $('.ql-editor').attr('data-placeholder', '')
+            editor.disable()
         })
     </script>
 </body>
